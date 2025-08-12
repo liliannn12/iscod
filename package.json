@@ -8,6 +8,7 @@
   },
   "scripts": {
     "serve": "nodemon www/app.js",
+    "dev": "nodemon server.js",
     "test": "jest"
   },
   "keywords": [],

@@ -6,6 +6,7 @@ const NotFoundError = require("./errors/not-found");
 const userRouter = require("./api/users/users.router");
 const articleRouter = require("./api/articles/articles.router");
 const usersController = require("./api/users/users.controller");
+const articlesController = require("./api/articles/articles.controller");
 const authMiddleware = require("./middlewares/auth");
 require("./api/articles/articles.schema"); // temporaire
 const app = express();
@@ -29,7 +30,11 @@ app.use((req, res, next) => {
 app.use(cors());
 app.use(express.json());
 
+// Route spécifique pour le endpoint public des articles d'un utilisateur
+app.get("/api/users/:userId/articles", articlesController.getUserArticles);
+// Routes protégées pour la gestion des utilisateurs
 app.use("/api/users", authMiddleware, userRouter);
+// Routes pour les articles (certaines protégées, d'autres non)
 app.use("/api/articles", articleRouter);
 app.post("/login", usersController.login);
 
