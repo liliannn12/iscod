@@ -1,4 +1,5 @@
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
+const { Schema, model } = mongoose;
 
 const articleSchema = Schema({
   title: String,
@@ -7,11 +8,14 @@ const articleSchema = Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  status: {
+    type: String,
+    enum: ["draft", "published"],
+    default: "draft",
+  },
 });
 
-let Article;
-
-module.exports = Article = model("Article", articleSchema);
+module.exports = mongoose.models.Article || model("Article", articleSchema);
 
 /*async function test() {
   const articles = await Article.find().populate({

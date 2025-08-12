@@ -7,7 +7,7 @@ const mockingoose = require("mockingoose");
 const User = require("../api/users/users.model");
 const usersService = require("../api/users/users.service");
 
-describe("tester API users", () => {
+describe.only("tester API users", () => {
   let token;
   const USER_ID = "fake";
   const MOCK_DATA = [
