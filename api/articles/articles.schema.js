@@ -15,7 +15,7 @@ const articleSchema = Schema({
   },
 });
 
-module.exports = mongoose.models.Article || model("Article", articleSchema);
+module.exports = model("Article", articleSchema);
 
 /*async function test() {
   const articles = await Article.find().populate({
