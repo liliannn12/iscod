@@ -1,9 +1,7 @@
 const request = require("supertest");
 const jwt = require("jsonwebtoken");
 const config = require("../config/index");
-const mongoose = require("mongoose");
 
-// Mock direct du middleware d'authentification
 jest.mock("../middlewares/auth");
 
 describe("Articles endpoints (mocked)", () => {
@@ -101,7 +99,6 @@ describe("Articles endpoints (mocked)", () => {
       .set("x-access-token", tokenUser)
       .send({ title: "Titre", content: "Contenu" });
 
-    console.log("CREATE response:", res.statusCode, res.body);
     expect(res.statusCode).toBe(201);
   });
 
@@ -119,7 +116,6 @@ describe("Articles endpoints (mocked)", () => {
       .set("x-access-token", tokenAdmin)
       .send({ title: "Nouveau titre" });
 
-    console.log("UPDATE response:", res.statusCode, res.body);
     expect(res.statusCode).toBe(200);
   });
 
@@ -137,7 +133,6 @@ describe("Articles endpoints (mocked)", () => {
       .delete(`/api/articles/${articleId}`)
       .set("x-access-token", tokenAdmin);
 
-    console.log("DELETE response:", res.statusCode, res.body);
     expect(res.statusCode).toBe(200);
   });
 
