@@ -63,9 +63,14 @@ class UsersController {
       if (!userId) {
         throw new UnauthorizedError();
       }
-      const token = jwt.sign({ userId }, config.secretJwtToken, {
-        expiresIn: "3d",
-      });
+      const user = await usersService.get(userId);
+      const token = jwt.sign(
+        { userId, id: userId, role: user.role },
+        config.secretJwtToken,
+        {
+          expiresIn: "3d",
+        }
+      );
       res.json({
         token,
       });
